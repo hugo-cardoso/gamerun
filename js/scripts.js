@@ -6,7 +6,9 @@ var horas = 0;
 var cronometro = false;
 var intervalo;
 var createInit = false;
-var velocity = 50;
+var velocity = 75;
+var volta = 0;
+var countVolta = false;
 
 
 $(function(){
@@ -32,18 +34,10 @@ $(function(){
     $('#view > .cenario').last().remove();
   };
 
-  $("#play").click(function(){
-
-    var elm = $("#pista");
-    var btn = $("#play");
-
-    if(btn.attr("src") == "assets/play.png") {
-      $(btn).attr("src", "assets/pause.png")
-    } else {
-      $(btn).attr("src", "assets/play.png")
-    }
-
-  });
+  function addVolta() {
+    volta = volta + 1;
+    $("#volta").html(volta);
+  }
 
   function criarPista(ref){
 
@@ -52,17 +46,17 @@ $(function(){
     console.log(nivel)
 
     if(nivel == 1){
-
       var divNova = "<div class='cenario largada' style='bottom:" + ref + "px;'></div>"
-
+      countVolta =  true;
     } else if (nivel == 2) {
-
+      if(countVolta){
+          addVolta();
+      }
       var divNova = "<div class='cenario pista' style='bottom:" + ref + "px;'></div>"
 
     } else {
-
-        var divNova = "<div class='cenario nivel1' style='bottom:" + ref + "px;'></div>"
-        nivel = 0;
+      var divNova = "<div class='cenario nivel1' style='bottom:" + ref + "px;'></div>"
+      nivel = 0;
     }
 
     $('#view > .cenario').first().before(divNova);
@@ -70,6 +64,12 @@ $(function(){
   };
 
   function correr() {
+
+    // if(velocity <= 50) {
+    //
+    // } else {
+    //
+    // }
 
     var proximoObj = $("#view > .cenario").first();
     var proximoObjY = parseInt(Number($("#view > .cenario").first().css("bottom").replace("px","")));
@@ -79,7 +79,7 @@ $(function(){
     console.log(objetoAtualY);
 
     if(proximoObjY <= 26) {
-      var refTop = proximoObjY + 925;
+      var refTop = proximoObjY + 817;
       objetoAtual.remove();
       criarPista(refTop);
     }
@@ -93,6 +93,12 @@ $(function(){
     $(objetoAtual).css({bottom: parseInt(objetoAtualY - velocity) + "px"});
 
   }
+
+  $(window).keydown(function( event ) {
+    if ( event.which == 38 ) {
+      correr();
+    }
+  })
 
   var left  = document.getElementById("leftFinger");
   var right = document.getElementById("rightFinger");
