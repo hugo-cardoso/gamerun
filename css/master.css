@@ -1,0 +1,97 @@
+html,body{
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+#view {
+  position: relative;
+  width: 100vw;
+  max-width: 767px;
+  height: 100vh;
+  min-height: 400px;
+}
+
+.hud {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  background: rgba(46, 161, 171, 0.95);
+  z-index: 999;
+}
+
+.hud .clock {
+  font-size: 16px;
+  color: #000;
+}
+
+.hud .clock img {
+  float: left;
+}
+
+.hud .clock span{
+  display: inline-block;
+}
+
+#leftFinger {
+  position: fixed;
+  bottom: 25px;
+  left: 0px;
+  margin-left: 24vw;
+  background: rgba(220, 224, 224, 0.2);
+  width: 25vw;
+  height: 200px;
+  z-index: 99999;
+  border-radius: 25vw;
+}
+
+#rightFinger {
+  position: fixed;
+  bottom: 25px;
+  right: 0px;
+  margin-right: 24vw;
+  background: rgba(220, 224, 224, 0.2);
+  width: 25vw;
+  height: 200px;
+  border-radius: 25vw;
+}
+
+#pista {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-image: url('../assets/pista.png');
+  background-color: #8cc641;
+  background-size: 100% auto;
+  background-position: 0px 8000px;
+  background-repeat: repeat-y;
+  transition: all 1s linear;
+  /*-webkit-animation: animPista 15s linear infinite;*/
+}
+
+@-webkit-keyframes animPista {
+  0% {
+    background-position: 0px 100%;
+  }
+  100% {
+    background-position: 0px 100vh;
+  }
+}
+
+/*
+SHADOW
+*/
+
+.shadow-1 {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+}
+
+.grid-25 {
+  width: 25%;
+  float: left;
+  height: 100%;
+}
