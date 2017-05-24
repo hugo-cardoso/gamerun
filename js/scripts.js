@@ -18,8 +18,18 @@ $(function(){
     game: false
   })
 
+  var nivel = 1;
+
+  var niveis = new Array({
+    bg: "largada"
+  },{
+    bg: "nivel1"
+  },{
+    bg: "pista"
+  })
+
   function removerPista(){
-    $('#view > .pista-red').last().remove();
+    $('#view > .cenario').last().remove();
   };
 
   $("#play").click(function(){
@@ -37,18 +47,34 @@ $(function(){
 
   function criarPista(ref){
 
-    var divNova = "<div class='pista-red' style='bottom:" + ref + "px;'></div>"
+    nivel = nivel+1;
 
-    $('#view > .pista-red').first().before(divNova);
+    console.log(nivel)
+
+    if(nivel == 1){
+
+      var divNova = "<div class='cenario largada' style='bottom:" + ref + "px;'></div>"
+
+    } else if (nivel == 2) {
+
+      var divNova = "<div class='cenario pista' style='bottom:" + ref + "px;'></div>"
+
+    } else {
+
+        var divNova = "<div class='cenario nivel1' style='bottom:" + ref + "px;'></div>"
+        nivel = 0;
+    }
+
+    $('#view > .cenario').first().before(divNova);
 
   };
 
   function correr() {
 
-    var proximoObj = $("#view > .pista-red").first();
-    var proximoObjY = parseInt(Number($("#view > .pista-red").first().css("bottom").replace("px","")));
-    var objetoAtual = $("#view > .pista-red").last();
-    var objetoAtualY = parseInt(Number($("#view > .pista-red").last().css("bottom").replace("px","")));
+    var proximoObj = $("#view > .cenario").first();
+    var proximoObjY = parseInt(Number($("#view > .cenario").first().css("bottom").replace("px","")));
+    var objetoAtual = $("#view > .cenario").last();
+    var objetoAtualY = parseInt(Number($("#view > .cenario").last().css("bottom").replace("px","")));
 
     console.log(objetoAtualY);
 
@@ -58,19 +84,15 @@ $(function(){
       criarPista(refTop);
     }
 
-    var proximoObj = $("#view > .pista-red").first();
-    var proximoObjY = parseInt(Number($("#view > .pista-red").first().css("bottom").replace("px","")));
-    var objetoAtual = $("#view > .pista-red").last();
-    var objetoAtualY = parseInt(Number($("#view > .pista-red").last().css("bottom").replace("px","")));
+    var proximoObj = $("#view > .cenario").first();
+    var proximoObjY = parseInt(Number($("#view > .cenario").first().css("bottom").replace("px","")));
+    var objetoAtual = $("#view > .cenario").last();
+    var objetoAtualY = parseInt(Number($("#view > .cenario").last().css("bottom").replace("px","")));
 
     $(proximoObj).css({bottom: parseInt(proximoObjY - velocity) + "px"});
     $(objetoAtual).css({bottom: parseInt(objetoAtualY - velocity) + "px"});
 
   }
-
-  // $(window).scroll(function(){
-  //   console.log(Number($(window).scrollTop()));
-  // })
 
   var left  = document.getElementById("leftFinger");
   var right = document.getElementById("rightFinger");
@@ -98,5 +120,5 @@ $(function(){
 })
 
 function removerPista(){
-  $('#view > .pista-red').last().remove();
+  $('#view > .cenario').last().remove();
 };
