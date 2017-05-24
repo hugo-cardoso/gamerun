@@ -10,6 +10,7 @@ html,body{
   max-width: 767px;
   height: 100vh;
   min-height: 400px;
+  overflow: hidden;
 }
 
 .hud {
@@ -19,7 +20,7 @@ html,body{
   width: 100%;
   height: 50px;
   background: rgba(46, 161, 171, 0.95);
-  z-index: 999;
+  z-index: 999999;
 }
 
 .hud .clock {
@@ -55,6 +56,7 @@ html,body{
   background: rgba(220, 224, 224, 0.2);
   width: 25vw;
   height: 200px;
+  z-index: 99999;
   border-radius: 25vw;
 }
 
@@ -67,10 +69,44 @@ html,body{
   background-image: url('../assets/pista.png');
   background-color: #8cc641;
   background-size: 100% auto;
-  background-position: 0px 8000px;
+  background-position: 0px 924px;
   background-repeat: repeat-y;
   transition: all 1s linear;
   /*-webkit-animation: animPista 15s linear infinite;*/
+}
+
+.pista-blue {
+  width: 100%;
+  height: 925px;
+  background: blue;
+  background-image: url('../assets/largadaSmall.png');
+  background-color: #8cc641;
+  background-position: center bottom;
+  background-size: 100% auto;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  transition: bottom .5s linear;
+}
+
+.pista-red {
+  width: 100%;
+  height: 925px;
+  background-image: url('../assets/largadaSmall.png'), url('../assets/largadaSmall.png');
+  background-repeat: no-repeat, no-repeat;
+  background-position: center -88px,
+  center bottom;
+  background-size: 100% auto;
+  background-color: #8cc641;
+  position: absolute;
+  bottom: 925px;
+  left: 0px;
+  z-index: 999;
+  transition: bottom .5s linear;
+}
+
+.pista-red.inicial {
+  bottom: 0px;
 }
 
 @-webkit-keyframes animPista {

@@ -1,12 +1,26 @@
+var wHeight = $(window).height();
+var centesimas = 0;
+var segundos = 0;
+var minutos = 0;
+var horas = 0;
+var cronometro = false;
+var intervalo;
+var createInit = false;
+var velocity = 50;
+
+
 $(function(){
 
-  var pistaY = 8000;
-  var centesimas = 0;
-  var segundos = 0;
-  var minutos = 0;
-  var horas = 0;
-  var cronometro = false;
-  var intervalo;
+
+  var states = new Array({
+    splash: true,
+    pause: false,
+    game: false
+  })
+
+  function removerPista(){
+    $('#view > .pista-red').last().remove();
+  };
 
   $("#play").click(function(){
 
@@ -14,62 +28,49 @@ $(function(){
     var btn = $("#play");
 
     if(btn.attr("src") == "assets/play.png") {
-      parar();
       $(btn).attr("src", "assets/pause.png")
     } else {
-      volta();
       $(btn).attr("src", "assets/play.png")
     }
 
-
-
   });
 
-  function tempo(op) {
-    cronometro = true;
-    if (op == 1) {
-      // document.getElementById('parar').style.display = "block";
-      // document.getElementById('comeca').style.display = "none";
-    }
-    var s = 1;
-    var m = 0;
-    var h = 0;
-    intervalo = window.setInterval(function() {
-      if (s == 60) { m++; s = 0; }
-      if (m == 60) { h++; s = 0; m = 0; }
-      if (h < 10) document.getElementById("hora").innerHTML = "0" + h + ":"; else document.getElementById("hora").innerHTML = h + "h";
-      if (s < 10) document.getElementById("segundo").innerHTML = "0" + s + ""; else document.getElementById("segundo").innerHTML = s + "s";
-      if (m < 10) document.getElementById("minuto").innerHTML = "0" + m + ":"; else document.getElementById("minuto").innerHTML = m + "m";
-      s++;
-    },1000);
-  }
+  function criarPista(ref){
 
-  function parar() {
-    cronometro = false;
-    window.clearInterval(intervalo);
-    // document.getElementById('parar').style.display = "none";
-    // document.getElementById('comeca').style.display = "block";
-  }
+    var divNova = "<div class='pista-red' style='bottom:" + ref + "px;'></div>"
 
-  function volta() {
-    document.getElementById('voltas').innerHTML += document.getElementById('hora').firstChild.data + "" + document.getElementById('minuto').firstChild.data + "" + document.getElementById('segundo').firstChild.data + "<br>";
-  }
+    $('#view > .pista-red').first().before(divNova);
 
-  function limpa() {
-    document.getElementById('voltas').innerHTML = "";
-  }
+  };
 
   function correr() {
 
-    if(cronometro == false) {
-      tempo();
+    var proximoObj = $("#view > .pista-red").first();
+    var proximoObjY = parseInt(Number($("#view > .pista-red").first().css("bottom").replace("px","")));
+    var objetoAtual = $("#view > .pista-red").last();
+    var objetoAtualY = parseInt(Number($("#view > .pista-red").last().css("bottom").replace("px","")));
+
+    console.log(objetoAtualY);
+
+    if(proximoObjY <= 26) {
+      var refTop = proximoObjY + 925;
+      objetoAtual.remove();
+      criarPista(refTop);
     }
 
-    pistaY = pistaY + 150;
+    var proximoObj = $("#view > .pista-red").first();
+    var proximoObjY = parseInt(Number($("#view > .pista-red").first().css("bottom").replace("px","")));
+    var objetoAtual = $("#view > .pista-red").last();
+    var objetoAtualY = parseInt(Number($("#view > .pista-red").last().css("bottom").replace("px","")));
 
-    $("#pista").css("background-position", "0px " + pistaY + "px");
+    $(proximoObj).css({bottom: parseInt(proximoObjY - velocity) + "px"});
+    $(objetoAtual).css({bottom: parseInt(objetoAtualY - velocity) + "px"});
 
   }
+
+  // $(window).scroll(function(){
+  //   console.log(Number($(window).scrollTop()));
+  // })
 
   var left  = document.getElementById("leftFinger");
   var right = document.getElementById("rightFinger");
@@ -83,13 +84,19 @@ $(function(){
   leftFinger.on('swipe', function(ev) {
 
     correr();
+    // criarPista();
 
   });
 
   rightFinger.on('swipe', function(ev) {
 
+    // criarPista();
     correr();
 
   });
 
 })
+
+function removerPista(){
+  $('#view > .pista-red').last().remove();
+};
