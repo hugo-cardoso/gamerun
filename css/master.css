@@ -15,6 +15,10 @@ html,body{
   overflow: hidden;
 }
 
+#view.active .touch {
+  display: block;
+}
+
 .alpha {
   position: absolute;
   width: 150px;
@@ -23,17 +27,22 @@ html,body{
   margin-left: -75px;
   text-align: center;
   color: #FFF;
-  z-index: 1000;
+  z-index: 99999;
 }
 
 .hud {
   position: fixed;
-  top: 0px;
+  top: -50px;
   left: 0px;
   width: 100%;
   height: 50px;
   background: rgba(46, 161, 171, 0.95);
-  z-index: 999999;
+  z-index: 1000;
+  transition: top .5s cubic-bezier(0.15, 0.24, 0, 1.1);
+}
+
+#view.active .hud{
+  top: 0px;
 }
 
 .hud .clock {
@@ -51,28 +60,26 @@ html,body{
   display: inline-block;
 }
 
+.touch{
+  display: none;
+}
+
 #leftFinger {
   position: fixed;
-  bottom: 25px;
+  bottom: 0px;
   left: 0px;
-  margin-left: 24vw;
-  background: rgba(220, 224, 224, 0.2);
-  width: 25vw;
-  height: 200px;
-  z-index: 99999;
-  border-radius: 25vw;
+  width: 50%;
+  height: 100%;
+  z-index: 999;
 }
 
 #rightFinger {
   position: fixed;
-  bottom: 25px;
+  bottom: 0px;
   right: 0px;
-  margin-right: 24vw;
-  background: rgba(220, 224, 224, 0.2);
-  width: 25vw;
-  height: 200px;
-  z-index: 99999;
-  border-radius: 25vw;
+  width: 50%;
+  height: 100%;
+  z-index: 999;
 }
 
 #pista {
@@ -139,13 +146,74 @@ html,body{
   bottom: 0px;
 }
 
-@-webkit-keyframes animPista {
-  0% {
-    background-position: 0px 100%;
-  }
-  100% {
-    background-position: 0px 100vh;
-  }
+#pause {
+  visibility: visible;
+  opacity: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  z-index: 1500;
+  transition: all .35s linear;
+}
+
+#view.active #pause {
+  visibility: hidden;
+  opacity: 0;
+}
+
+#pause .wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+}
+
+#pause .wrap .menu {
+  width: 75%;
+  height: 300px;
+  margin: auto;
+  z-index: 100000;
+}
+
+#pause .wrap .menu .logo {
+  width: 100%;
+  height: 200px;
+  background-image: url('../assets/logo.png');
+  background-repeat: no-repeat;
+  background-size: 200px auto;
+  background-position: center;
+}
+
+#pause .wrap .menu .menu-play {
+  width: 100%;
+  height: 100px;
+  background: #FFF;
+  border: 5px solid rgb(168, 168, 168);
+  border-radius: 10px;
+  font-size: 1.3rem;
+  display: flex;
+  text-align: center;
+}
+
+#pause .wrap .menu .menu-play:focus {
+  outline: none;
+}
+
+#pause .wrap .menu .menu-play img {
+  height: 80%;
+  margin: auto;
+}
+
+#pause .wrap .offset-bg {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.5;
 }
 
 /*

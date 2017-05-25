@@ -10,7 +10,8 @@
 </head>
 <body>
 
-  <div id="view">
+  <div id="view" class="">
+
     <div class="hud shadow-1">
 
       <div class="clock"  style="text-align: left; float: left; height: 100%; line-height: 50px;">
@@ -18,7 +19,7 @@
         <span id="volta">0</span>
       </div>
       <div style="float: right; height: 100%; text-align: right;">
-        <img src="assets/play.png" style="height: 100%;" id="play" alt="">
+        <img src="assets/pause.png" style="height: 100%;" id="play" onclick="run()">
       </div>
 
     </div>
@@ -29,12 +30,29 @@
     <div class="cenario pista"></div>
     <div class="cenario inicial largada"></div>
 
-    <!-- <div id="pista">
+    <div class="touch">
+      <div id="leftFinger"></div>
+      <div id="rightFinger"></div>
+    </div>
 
-    </div> -->
+    <section id="pause">
 
-    <div id="leftFinger"></div>
-    <div id="rightFinger"></div>
+      <div class="wrap">
+
+        <div class="menu">
+          <div class="logo">
+
+          </div>
+          <button type="button" name="button" class="menu-play shadow-1" onclick="run()">
+            <img src="assets/menu-play.png" alt="">
+          </button>
+        </div>
+
+        <div class="offset-bg"></div>
+
+      </div>
+
+    </section>
 
   </div>
 
