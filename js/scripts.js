@@ -6,10 +6,12 @@ var horas = 0;
 var cronometro = false;
 var intervalo;
 var createInit = false;
-var velocity = 75;
+var velocity = 105;
 var volta = 0;
 var countVolta = false;
 var nivel = 1;
+
+var tapSound = new buzz.sound("assets/tap.mp3");
 
 function removerPista(){
   $('#view > .cenario').last().remove();
@@ -68,6 +70,7 @@ function correr() {
   var objetoAtual = $("#view > .cenario").last();
   var objetoAtualY = parseInt(Number($("#view > .cenario").last().css("bottom").replace("px","")));
 
+  tapSound.play();
   $(proximoObj).css({bottom: parseInt(proximoObjY - velocity) + "px"});
   $(objetoAtual).css({bottom: parseInt(objetoAtualY - velocity) + "px"});
 
