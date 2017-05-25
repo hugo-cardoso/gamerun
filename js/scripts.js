@@ -12,6 +12,7 @@ var countVolta = false;
 var nivel = 1;
 
 var tapSound = new buzz.sound("assets/tap.mp3");
+var completeSound = new buzz.sound("assets/complete.mp3");
 
 function removerPista(){
   $('#view > .cenario').last().remove();
@@ -19,6 +20,7 @@ function removerPista(){
 
 function addVolta() {
   volta = volta + 1;
+  completeSound.play();
   $("#volta").html(volta);
 }
 
