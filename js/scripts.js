@@ -30,8 +30,6 @@ function criarPista(ref){
 
   nivel = nivel+1;
 
-  console.log(nivel)
-
   if(nivel == 1){
     var divNova = "<div class='cenario largada' style='bottom:" + ref + "px;'></div>"
     countVolta =  true;
@@ -71,6 +69,7 @@ function createChellenger(){
   $(".challenge").show();
   setTimeout(function(){
     if($(".challenge").css("display") === "block"){
+      level = 0;
       velocity = 0;
       points = points - parseInt(points / 2);
 
@@ -89,6 +88,8 @@ function correr() {
   points += parseInt(velocity * 0.02);
   $("#points").html(points);
 
+  console.log(velocity);
+
   var proximoObj = $("#view > .cenario").first();
   var proximoObjY = parseInt(Number($("#view > .cenario").first().css("bottom").replace("px","")));
   var objetoAtual = $("#view > .cenario").last();
@@ -102,12 +103,15 @@ function correr() {
 
   if(velocity >= 300 && level != 1) {
     level = 1;
+    console.log("Level 1")
     createChellenger();
-  } else if (velocity >= 600 && level != 2) {
+  } else if (velocity >= 400 && velocity <= 500 && level != 2) {
     level = 2;
+    console.log("Level 2")
     createChellenger();
-  } else if (velocity >= 1000 && level != 3) {
+  } else if (velocity >= 500 && velocity <= 600 && level != 3) {
     level = 3;
+    console.log("Level 3")
     createChellenger();
   }
 
