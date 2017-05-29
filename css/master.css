@@ -6,6 +6,10 @@ html,body{
   overflow: hidden;
 }
 
+*:focus {
+  outline: none;
+}
+
 #view {
   position: relative;
   width: 100vw;
@@ -13,6 +17,10 @@ html,body{
   height: 100vh;
   min-height: 400px;
   overflow: hidden;
+  background-image: url('../assets/niveis/pistaOnly.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 600px 817px;
 }
 
 #view.active .touch {
@@ -45,16 +53,16 @@ html,body{
   top: 0px;
 }
 
-.hud .clock {
+.hud {
   font-size: 25px;
   color: #000;
 }
 
-.hud .clock img {
+.hud img {
   float: left;
 }
 
-.hud .clock span{
+.hud span{
   line-height: 50px;
   color: #FFF;
   display: inline-block;
@@ -108,7 +116,7 @@ html,body{
   position: absolute;
   bottom: 0px;
   left: 0px;
-  transition: bottom .5s linear;
+  transition: bottom .1s linear;
 }
 
 .cenario {
@@ -214,6 +222,18 @@ html,body{
   height: 100%;
   background: #000;
   opacity: 0.5;
+}
+
+.challenge {
+  position: fixed;
+  top: 100px;
+  width: calc(100% - 100px);
+  left: 50px;
+  height: 50px;
+  z-index: 1000;
+  border-radius: 10px;
+  border: 0px;
+  display: none;
 }
 
 /*

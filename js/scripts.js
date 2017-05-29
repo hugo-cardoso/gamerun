@@ -6,10 +6,12 @@ var horas = 0;
 var cronometro = false;
 var intervalo;
 var createInit = false;
-var velocity = 105;
+var velocity = 0;
 var volta = 0;
 var countVolta = false;
 var nivel = 1;
+var points = 0;
+var level = 0;
 
 var tapSound = new buzz.sound("assets/tap.mp3");
 var completeSound = new buzz.sound("assets/complete.mp3");
@@ -52,19 +54,61 @@ function run(){
   $("#view").toggleClass("active");
 };
 
+setInterval(function(){
+  if(velocity <= 0){
+
+  } else {
+    velocity = parseInt(velocity - (velocity * 0.1));
+    // correr();
+  }
+}, 1000);
+
+$(".challenge").click(function(){
+  $(this).hide();
+});
+
+function createChellenger(){
+  $(".challenge").show();
+  setTimeout(function(){
+    if($(".challenge").css("display") === "block"){
+      velocity = 0;
+      points = points - parseInt(points / 2);
+
+      $("#speed").html(velocity);
+      $("#points").html(points);
+
+      $(".challenge").hide();
+    }
+  }, 3000);
+}
+
 function correr() {
+
+  velocity = velocity + 10;
+  $("#speed").html(velocity);
+  points += parseInt(velocity * 0.02);
+  $("#points").html(points);
 
   var proximoObj = $("#view > .cenario").first();
   var proximoObjY = parseInt(Number($("#view > .cenario").first().css("bottom").replace("px","")));
   var objetoAtual = $("#view > .cenario").last();
   var objetoAtualY = parseInt(Number($("#view > .cenario").last().css("bottom").replace("px","")));
 
-  console.log(objetoAtualY);
-
   if(proximoObjY <= 26) {
     var refTop = proximoObjY + 817;
     objetoAtual.remove();
     criarPista(refTop);
+  }
+
+  if(velocity >= 300 && level != 1) {
+    level = 1;
+    createChellenger();
+  } else if (velocity >= 600 && level != 2) {
+    level = 2;
+    createChellenger();
+  } else if (velocity >= 1000 && level != 3) {
+    level = 3;
+    createChellenger();
   }
 
   var proximoObj = $("#view > .cenario").first();
@@ -93,16 +137,14 @@ var rightFinger = new Hammer(right);
 leftFinger.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
 rightFinger.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
 
-leftFinger.on('swipe', function(ev) {
+leftFinger.on('swipedown', function(ev) {
 
   correr();
-  // criarPista();
 
 });
 
-rightFinger.on('swipe', function(ev) {
+rightFinger.on('swipedown', function(ev) {
 
-  // criarPista();
   correr();
 
 });
